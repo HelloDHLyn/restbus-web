@@ -1,1 +1,50 @@
-<p>hello!</p>
+{% extends 'base.html' %}
+{% block head %}
+<script type="text/javascript">
+  function setResults(routes) {
+    routes.forEach((route) => {
+      $('.search-results').append(
+        `<div class="result"><b>${route.route_name}</b> (${route.first_station_name} → ${route.last_station_name})</div>`
+      )
+    });
+  }
+
+  $(document).ready(() => {
+    $('#btn-search').on('click', (event) => {
+      $('.search-results').html('');
+
+      let $this = $(event.currentTarget);
+      $this.addClass('loading');
+
+      let routeName = $('input[name=\'route_name\']').val();
+      $.get(`https://apis.lynlab.co.kr/v1/routes?query=${routeName}`)
+        .done((data) => setResults(data))
+        .fail((e) => console.log(e))
+        .always(() => $this.removeClass('loading'));
+    });
+  });
+</script>
+<style>
+  .search-results {
+    margin-top: 2rem;
+  }
+
+  .search-results .result {
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid #f1f3f5;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h3>노선 검색</h3>
+<p>노선 및 운행 정보는 서울특별시에서 제공합니다.</p>
+<form>
+  <div class="input-group">
+    <input type="text" class="form-input input-lg" name="route_name" placeholder="노선 번호">
+    <button type="button" class="btn btn-primary btn-lg input-group-btn" id="btn-search">
+      <i class="icon icon-search"></i>
+    </button>
+  </div>
+</form>
+<div class="search-results"></div>
+{% endblock %}

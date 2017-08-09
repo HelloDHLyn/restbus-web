@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.2.14/spectre.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.2.14/spectre-exp.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.2.14/spectre-icons.min.css">
+  <link rel="stylesheet" href="/static/global.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+<header class="navbar">
+  <div class="container grid-960">
+    <section class="navbar-section">
+      <a href="/" class="navbar-brand mr-10">RestBus</a>
+      <a href="/" class="btn btn-link">노선 검색</a>
+    </section>
+    <section class="navbar-section"></section>
+  </div>
+</header>
+<div class="container grid-960 cjk">
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
+</html>
