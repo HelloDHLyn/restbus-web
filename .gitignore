@@ -1,0 +1,7 @@
+# Python stuffs
+*.pyc
+__pycache__
+
+# Development
+env
+.idea
