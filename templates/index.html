@@ -4,7 +4,7 @@
   function setResults(routes) {
     routes.forEach((route) => {
       $('.search-results').append(
-        `<div class="result"><b>${route.route_name}</b> (${route.first_station_name} → ${route.last_station_name})</div>`
+        `<div class="result"><a href="/stations?route_id=${route.route_id}"><b>${route.route_name}</b></a> (${route.first_station_name} → ${route.last_station_name})</div>`
       )
     });
   }
