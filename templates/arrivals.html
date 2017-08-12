@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block head %}
+<script type="text/javascript">
+  function setTimer(element) {
+    let timer = () => {
+      let leftTimeStr = '';
+      if (seconds > 60) {
+        leftTimeStr = `${Math.floor(seconds / 60)}분 `;
+      }
+      leftTimeStr += `${seconds % 60}초`;
+
+      element.html(leftTimeStr);
+      seconds -= 1;
+    };
+
+    let seconds = element.data('seconds');
+
+    timer();
+    setInterval(timer, 1000);
+  }
+
+  $(document).ready(() => {
+    $('.left-time').each((idx, element) => setTimer($(element)));
+  });
+</script>
+<style>
+  .result {
+    margin-bottom: 3rem;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h3>도착 정보</h3>
+<div class="results">
+  <div class="text-center result">
+    <h4>이번</h4>
+    <h6>{{ obj[0].station_name }}</h6>
+    <p>
+      <span class="left-time" data-seconds="{{ obj[0].waiting_time }}"></span> ({{ obj[0].before }} 정류장 전)<br/>
+      탑승객 : {{ obj[0].people_count }}명 ({% if obj[0].is_full %}혼잡{% else %}여유{% endif %})
+    </p>
+  </div>
+  <div class="text-center result">
+    <h4>다음</h4>
+    <h6>{{ obj[1].station_name }}</h6>
+    <p>
+      <span class="left-time" data-seconds="{{ obj[1].waiting_time }}"></span> ({{ obj[1].before }} 정류장 전)<br/>
+      탑승객 : {{ obj[1].people_count }}명 ({% if obj[1].is_full %}혼잡{% else %}여유{% endif %})
+    </p>
+  </div>
+</div>
+{% endblock %}
