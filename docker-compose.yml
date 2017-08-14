@@ -1,0 +1,11 @@
+version: '2'
+services:
+  api:
+    build: .
+    image: restbus-web
+    container_name: restbus-web
+    command: python main.py
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8082:5000"
