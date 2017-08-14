@@ -17,7 +17,7 @@
       $this.addClass('loading');
 
       let routeName = $('input[name=\'route_name\']').val();
-      $.get(`https://apis.lynlab.co.kr/v1/routes?query=${routeName}`)
+      $.get(`https://apis.lynlab.co.kr/v1/bus/routes?query=${routeName}`)
         .done((data) => setResults(data))
         .fail((e) => console.log(e))
         .always(() => $this.removeClass('loading'));
