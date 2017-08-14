@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>정거장 목록</h3>
+<div class="timeline">
+  {% for station in obj %}
+  <div class="timeline-item">
+    <div class="timeline-left">
+      {% if station.sequence == 1 or station.is_turn_station %}
+      <div class="timeline-icon icon-lg">
+        <i class="icon icon-downward"></i>
+      </div>
+      {% else %}
+      <div class="timeline-icon"></div>
+      {% endif %}
+    </div>
+    <div class="timeline-content">
+      <div class="tile">
+        <div class="tile-content">
+          <p>
+            <a href="/arrivals?route_id={{ context.params.route_id }}&station_id={{ station.station_id }}&sequence={{ station.sequence }}"><b>{{ station.station_name }}</b></a>
+            {% if station.station_num > 0 %} ({{ station.station_num }}){% endif %}<br/>
+            {{ station.direction }} 방향
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
